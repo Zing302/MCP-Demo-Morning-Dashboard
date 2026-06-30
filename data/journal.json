@@ -1,0 +1,46 @@
+{
+  "entries": [
+    {
+      "id": "c26011bb-aba5-4920-a228-2bc81bb1b349",
+      "date": "2026-06-29",
+      "content": "Shipped the weather card refactor and it felt clean. Good momentum heading into the week.",
+      "mood": "good",
+      "created_at": "2026-06-29T08:30:00+00:00"
+    },
+    {
+      "id": "2611ce7d-4695-4225-9957-2382c6073b6a",
+      "date": "2026-06-28",
+      "content": "Long day of meetings, not much deep work. Felt scattered but kept things moving.",
+      "mood": "neutral",
+      "created_at": "2026-06-28T08:30:00+00:00"
+    },
+    {
+      "id": "dd79e91b-996a-4fb0-ac60-82ce6e807042",
+      "date": "2026-06-27",
+      "content": "Hit a frustrating bug in the log server that ate most of the afternoon. Drained.",
+      "mood": "tough",
+      "created_at": "2026-06-27T08:30:00+00:00"
+    },
+    {
+      "id": "80321061-7ef7-4f72-9bda-3af1b6c82793",
+      "date": "2026-06-26",
+      "content": "Took a proper lunch break and a walk. Came back sharper and closed two tickets.",
+      "mood": "good",
+      "created_at": "2026-06-26T08:30:00+00:00"
+    },
+    {
+      "id": "49d5ff44-3e6f-4186-98fa-961fcf559b29",
+      "date": "2026-06-25",
+      "content": "Quiet day. Mostly planning and reading docs, nothing dramatic.",
+      "mood": "neutral",
+      "created_at": "2026-06-25T08:30:00+00:00"
+    },
+    {
+      "id": "f4c2906c-35c5-4360-8548-e4410974db4a",
+      "date": "2026-06-23",
+      "content": "Wrapped the sprint a little behind, but the demo went better than expected.",
+      "mood": "good",
+      "created_at": "2026-06-23T08:30:00+00:00"
+    }
+  ]
+}

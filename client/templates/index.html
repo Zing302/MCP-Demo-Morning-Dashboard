@@ -1,0 +1,162 @@
+<!-- Morning Dashboard — single-page, wired to /api/refresh, /api/status, /api/chat -->
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Morning Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: { extend: {
+      colors: {
+        "background": "#f6faff", "primary": "#895032", "primary-fixed": "#ffdbcb",
+        "primary-fixed-dim": "#ffb692", "primary-container": "#ffb38e", "on-primary": "#ffffff",
+        "on-primary-container": "#7a4326", "error": "#ba1a1a", "error-container": "#ffdad6",
+        "secondary": "#356668", "secondary-container": "#b9ecee", "outline": "#85736c",
+        "outline-variant": "#d7c2b9", "tertiary": "#605f50", "surface": "#f6faff",
+        "surface-bright": "#f6faff", "surface-dim": "#cfdce7", "surface-container-lowest": "#ffffff",
+        "surface-container-low": "#ebf5ff", "surface-container": "#e3effb",
+        "surface-container-high": "#ddeaf5", "surface-container-highest": "#d8e4f0",
+        "surface-variant": "#d8e4f0", "on-surface": "#111d25", "on-surface-variant": "#52443d",
+        "on-background": "#111d25", "inverse-surface": "#26323b", "inverse-on-surface": "#e6f2fe",
+        "success": "#2e7d52"
+      },
+      borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+      spacing: { "gutter": "24px", "section-gap": "64px", "stack-sm": "8px", "stack-md": "16px",
+        "stack-lg": "32px", "container-padding-mobile": "20px", "container-padding-desktop": "40px" },
+      fontFamily: { "display-lg": ["Plus Jakarta Sans"], "headline-lg": ["Plus Jakarta Sans"],
+        "headline-md": ["Plus Jakarta Sans"], "body-lg": ["Plus Jakarta Sans"],
+        "body-md": ["Plus Jakarta Sans"], "label-mono": ["JetBrains Mono"] },
+      fontSize: {
+        "display-lg": ["48px", { lineHeight: "1.1", letterSpacing: "-0.02em", fontWeight: "700" }],
+        "headline-lg": ["32px", { lineHeight: "1.2", fontWeight: "600" }],
+        "headline-md": ["20px", { lineHeight: "1.4", fontWeight: "600" }],
+        "body-lg": ["18px", { lineHeight: "1.6", fontWeight: "400" }],
+        "body-md": ["16px", { lineHeight: "1.6", fontWeight: "400" }],
+        "label-mono": ["13px", { lineHeight: "1.5", letterSpacing: "0.02em", fontWeight: "400" }]
+      }
+    } }
+  }
+</script>
+<link href="/static/css/dashboard.css" rel="stylesheet">
+</head>
+<body class="min-h-screen flex flex-col font-body-md text-body-md text-on-background bg-background antialiased">
+
+<!-- Header -->
+<header class="fixed top-0 w-full z-50 bg-surface-bright/70 backdrop-blur-xl ambient-shadow">
+  <div class="flex justify-between items-center px-container-padding-mobile md:px-container-padding-desktop py-4 max-w-[1440px] mx-auto">
+    <div class="font-display-lg text-headline-md text-primary tracking-tight">Morning Dashboard</div>
+    <div class="flex items-center gap-stack-md">
+      <!-- Status dots (one per server), filled by JS -->
+      <div id="status-dots" class="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-container-low" title="Server status"></div>
+      <button id="refresh-btn" class="flex items-center gap-2 px-4 py-2 rounded-full bg-primary text-on-primary hover:opacity-90 active:scale-[0.98] transition-all">
+        <span class="material-symbols-outlined text-[18px]">refresh</span>
+        <span class="font-body-md text-sm">Refresh</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Main -->
+<main class="flex-grow pt-[96px] px-container-padding-mobile md:px-container-padding-desktop pb-section-gap max-w-[1440px] mx-auto w-full">
+
+  <section class="mb-stack-lg pt-4">
+    <h1 id="greeting" class="font-display-lg text-display-lg text-on-surface mb-1">Good morning.</h1>
+    <p class="font-body-lg text-body-lg text-on-surface-variant">Here is your day at a glance.</p>
+  </section>
+
+  <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+
+    <!-- Weather -->
+    <section class="md:col-span-4 card relative overflow-hidden">
+      <div class="absolute -right-20 -top-20 w-96 h-96 bg-primary-fixed/20 rounded-full blur-3xl opacity-50 pointer-events-none"></div>
+      <div class="relative z-10">
+        <div class="card-head"><span class="card-eyebrow">Current Conditions</span>
+          <span class="material-symbols-outlined text-primary-fixed-dim text-[40px]" style="font-variation-settings:'FILL' 1;">partly_cloudy_day</span>
+        </div>
+        <div id="weather-body" class="mt-4"></div>
+      </div>
+    </section>
+
+    <!-- Calendar: Today's Flow -->
+    <section class="md:col-span-8 card flex flex-col">
+      <div class="card-head">
+        <h3 class="card-title">Today's Flow</h3>
+        <div class="flex gap-1">
+          <button id="add-event-btn" title="Add event" class="p-1.5 rounded-full text-on-surface-variant hover:text-primary hover:bg-surface-container-low transition-colors"><span class="material-symbols-outlined text-[20px]">event</span></button>
+          <button id="add-todo-btn" title="Add todo" class="p-1.5 rounded-full text-on-surface-variant hover:text-primary hover:bg-surface-container-low transition-colors"><span class="material-symbols-outlined text-[20px]">add_task</span></button>
+        </div>
+      </div>
+      <div id="calendar-body" class="mt-4 flex-grow"></div>
+    </section>
+
+    <!-- Journal: Weekly Mood -->
+    <section class="md:col-span-4 card flex flex-col">
+      <div class="card-head"><h3 class="card-title">Weekly Mood</h3>
+        <span class="material-symbols-outlined text-on-surface-variant">mood</span></div>
+      <div id="journal-body" class="mt-4 flex-grow"></div>
+    </section>
+
+    <!-- Habits: derived activity patterns from the log server -->
+    <section class="md:col-span-4 card flex flex-col">
+      <div class="card-head"><h3 class="card-title">Habits</h3>
+        <span class="material-symbols-outlined text-on-surface-variant">insights</span></div>
+      <div id="habits-body" class="mt-4 flex-grow"></div>
+    </section>
+
+    <!-- Markets: Watchlist -->
+    <section class="md:col-span-4 card flex flex-col">
+      <div class="card-head"><h3 class="card-title">Watchlist</h3>
+        <span class="material-symbols-outlined text-on-surface-variant">show_chart</span></div>
+      <div id="stocks-body" class="mt-4 flex-grow"></div>
+    </section>
+
+    <!-- Markets: Headlines -->
+    <section class="md:col-span-12 card">
+      <div class="card-head"><h3 class="card-title">Morning Headlines</h3>
+        <span class="material-symbols-outlined text-on-surface-variant">newspaper</span></div>
+      <div id="headlines-body" class="mt-4"></div>
+    </section>
+
+    <!-- System Health (log) — full-width strip at the bottom -->
+    <section class="md:col-span-12 card !p-0 overflow-hidden flex flex-col">
+      <div class="flex items-center gap-2 px-5 py-4 bg-inverse-surface">
+        <span class="material-symbols-outlined text-secondary-container text-[20px]">terminal</span>
+        <h3 class="font-headline-md text-headline-md text-inverse-on-surface">System Health</h3>
+      </div>
+      <pre id="log-body" class="sys-log flex-grow m-0 p-5 overflow-auto bg-[#1E293B] font-label-mono text-label-mono text-surface-container-high whitespace-pre-wrap"></pre>
+    </section>
+
+  </div>
+</main>
+
+<!-- Floating chat -->
+<div class="fixed bottom-8 right-8 z-[100] flex flex-col items-end gap-4">
+  <div id="chat-panel" class="hidden w-[360px] h-[460px] bg-surface-container-lowest rounded-2xl shadow-2xl border border-surface-variant overflow-hidden flex flex-col">
+    <div class="bg-primary p-4 text-on-primary flex justify-between items-center">
+      <div class="flex items-center gap-2"><span class="material-symbols-outlined">smart_toy</span><span class="font-semibold">Morning Assistant</span></div>
+      <button id="chat-close" class="hover:bg-white/20 rounded-full p-1"><span class="material-symbols-outlined">close</span></button>
+    </div>
+    <div id="chat-messages" class="flex-grow p-4 overflow-y-auto flex flex-col gap-3"></div>
+    <form id="chat-form" class="p-3 border-t border-surface-variant bg-surface-bright">
+      <div class="relative">
+        <input id="chat-input" type="text" autocomplete="off" placeholder="Ask anything…"
+          class="w-full bg-surface-container-low border-none rounded-full py-2.5 pl-4 pr-11 text-sm focus:ring-2 focus:ring-primary/20">
+        <button type="submit" class="absolute right-2 top-1/2 -translate-y-1/2 text-primary disabled:opacity-40">
+          <span class="material-symbols-outlined">send</span>
+        </button>
+      </div>
+    </form>
+  </div>
+  <button id="chat-toggle" class="w-14 h-14 bg-primary text-on-primary rounded-full shadow-lg flex items-center justify-center hover:scale-110 active:scale-95 transition-all">
+    <span class="material-symbols-outlined text-[28px]">chat_bubble</span>
+  </button>
+</div>
+
+<script src="/static/js/dashboard.js"></script>
+</body>
+</html>

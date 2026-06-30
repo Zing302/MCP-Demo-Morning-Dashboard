@@ -1,0 +1,57 @@
+{
+  "events": [
+    {
+      "id": "211ac78a-6f6f-44b6-8546-a48840a4949e",
+      "title": "Team Standup",
+      "date": "2026-06-30",
+      "time": "09:00",
+      "duration_minutes": 15
+    },
+    {
+      "id": "6780c85e-e4cf-4c08-b53b-440b82556a7e",
+      "title": "Deep Work: Q4 doc",
+      "date": "2026-06-30",
+      "time": "15:00",
+      "duration_minutes": 90
+    },
+    {
+      "id": "96c9c2e3-21bf-4fb6-a803-60485f2c69d7",
+      "title": "Evening Run",
+      "date": "2026-06-30",
+      "time": "17:30",
+      "duration_minutes": 45
+    }
+  ],
+  "todos": [
+    {
+      "id": "a0126c71-4032-4fbd-b5ad-ddff4a64fe9b",
+      "title": "Review PR #142",
+      "due": null,
+      "done": true
+    },
+    {
+      "id": "2ef24fa1-b038-4cdd-9799-fd0148ea2e9c",
+      "title": "Reply to vendor email",
+      "due": "2026-06-30",
+      "done": false
+    },
+    {
+      "id": "408ae321-e152-471e-a3e3-9fbbf7325ab5",
+      "title": "Book dentist",
+      "due": null,
+      "done": false
+    },
+    {
+      "id": "ddfcd2a3-79a7-40a5-b67a-92439cba47cf",
+      "title": "Draft Q4 strategy",
+      "due": "2026-06-30",
+      "done": false
+    },
+    {
+      "id": "1963b5c3-8163-4c61-a76b-08b21322a987",
+      "title": "Water the plants",
+      "due": null,
+      "done": true
+    }
+  ]
+}

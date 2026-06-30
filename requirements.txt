@@ -1,0 +1,18 @@
+# MCP
+mcp>=1.0.0
+
+# Client / Dashboard
+fastapi>=0.110.0
+uvicorn>=0.29.0
+httpx>=0.27.0
+jinja2>=3.1.0
+python-dotenv>=1.0.0
+anthropic>=0.25.0
+
+# Server dependencies
+yfinance>=0.2.40          # Market & News — stocks (no API key)
+feedparser>=6.0.0         # Market & News — Google News RSS (no API key)
+requests>=2.31.0          # Weather — HTTP calls
+
+# Shared
+pydantic>=2.0.0

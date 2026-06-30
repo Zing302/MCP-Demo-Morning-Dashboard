@@ -1,0 +1,29 @@
+{
+  "mcpServers": {
+    "calendar": {
+      "command": "python",
+      "args": ["-m", "servers.calendar.server"],
+      "description": "Events, todos, and daily schedule"
+    },
+    "journal": {
+      "command": "python",
+      "args": ["-m", "servers.journal.server"],
+      "description": "Diary entries, mood tracking, weekly summary"
+    },
+    "weather": {
+      "command": "python",
+      "args": ["-m", "servers.weather.server"],
+      "description": "Multi-source weather forecast and synthesis"
+    },
+    "market_news": {
+      "command": "python",
+      "args": ["-m", "servers.market_news.server"],
+      "description": "Stock watchlist and AI/tech headlines"
+    },
+    "log": {
+      "command": "python",
+      "args": ["-m", "servers.log.server"],
+      "description": "Cross-server activity monitoring and habit tracking"
+    }
+  }
+}

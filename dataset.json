@@ -1,0 +1,38 @@
+[
+  {
+    "prompt_inputs": {
+      "content": "The phenomenological approach to consciousness interrogates the relationship between subjective experience and objective reality, challenging the Cartesian dualism that has long haunted epistemological inquiry. By bracketing presuppositions about the external world, we reveal the intentional structure of consciousness itself\u2014the way meaning emerges through our engagement with phenomena rather than residing in objects independent of perception. This methodological suspension does not deny the world's existence but rather defers questions of ontological status to examine how consciousness constitutes its objects through temporal synthesis and horizonal awareness. The implications extend beyond philosophy proper, suggesting that understanding human experience requires attending to the prereflective dimensions of embodied existence that escape the grasp of purely analytical frameworks."
+    },
+    "solution_criteria": [
+      "Extracts both explicit concepts (phenomenology, consciousness, intentionality) and implicit theoretical themes (subject-object relationship, the nature of meaning-making, embodied experience) rather than only surface-level keywords",
+      "Identifies underlying philosophical concerns (epistemology, ontology, the structure of experience) that are suggested through context and argumentation rather than directly named",
+      "Distinguishes between methodological approaches and substantive topics being investigated"
+    ],
+    "task_description": "Extract topics out of a passage of text from a scholarly article into a JSON array of strings",
+    "scenario": "Testing with dense philosophical or theoretical text containing implicit and subtle themes that require inference, rather than explicit topic mentions, to evaluate whether the prompt extracts conceptual themes vs. only obvious keywords"
+  },
+  {
+    "prompt_inputs": {
+      "content": "Recent advances in biomedical engineering have leveraged interdisciplinary approaches to develop tissue scaffolds that integrate principles from materials science, cellular biology, and mechanical engineering. Specifically, researchers have synthesized biodegradable polymer matrices composed of poly(lactic-co-glycolic acid) (PLGA) that provide structural support while undergoing enzymatic degradation over 12-16 weeks, mimicking the extracellular matrix composition. Simultaneously, the mechanical properties\u2014including Young's modulus and tensile strength\u2014were optimized through electrospinning techniques to match native tissue stiffness, ranging from 10-50 MPa depending on the target organ. Furthermore, surface functionalization with cell adhesion peptides derived from fibronectin enhanced osteoblast proliferation and differentiation through integrin-mediated signaling pathways, while maintaining porosity levels of 80-90% to facilitate nutrient diffusion and vascularization within the engineered construct."
+    },
+    "solution_criteria": [
+      "Identifies and separates all major topics across biology, chemistry, and engineering domains without conflating overlapping concepts",
+      "Distinguishes between specific techniques (electrospinning, surface functionalization) and broader conceptual areas (mechanical properties, cellular signaling)",
+      "Captures both material science topics and biological function topics as distinct entries"
+    ],
+    "task_description": "Extract topics out of a passage of text from a scholarly article into a JSON array of strings",
+    "scenario": "Testing with interdisciplinary content containing overlapping topics from multiple fields (e.g., biomedical engineering combining biology, chemistry, and engineering concepts) to verify the prompt correctly identifies and separates distinct topic areas"
+  },
+  {
+    "prompt_inputs": {
+      "content": "Recent advances in quantum error correction (QEC) have demonstrated significant progress in mitigating decoherence effects in superconducting qubits through the implementation of surface codes and topological codes. The surface code architecture, utilizing a 2D lattice of physical qubits arranged in a checkerboard pattern, achieves logical error rates below the threshold required for fault-tolerant quantum computation (FTQC). Furthermore, the integration of machine learning algorithms with variational quantum eigensolvers (VQE) has enabled more efficient exploration of the potential energy surface (PES) in molecular simulation tasks. Recent experiments at IBM and Google have employed Noisy Intermediate-Scale Quantum (NISQ) devices to validate these hybrid classical-quantum approaches, though challenges remain in scaling beyond current CNOT gate fidelities and coherence times (T1 and T2). The application of quantum annealing (QA) to combinatorial optimization problems continues to show promise, particularly when coupled with adiabatic quantum computation (AQC) frameworks that leverage the adiabatic theorem."
+    },
+    "solution_criteria": [
+      "Extracted topics should include conceptual areas (e.g., 'quantum error correction', 'molecular simulation', 'combinatorial optimization') rather than treating acronyms as standalone topics",
+      "Acronyms (QEC, FTQC, VQE, PES, NISQ, CNOT, T1, T2, QA, AQC) should not appear as separate extracted topics unless they represent distinct concepts not already captured",
+      "All major research domains and methodologies mentioned should be represented as topics"
+    ],
+    "task_description": "Extract topics out of a passage of text from a scholarly article into a JSON array of strings",
+    "scenario": "Testing with highly specialized domain text (e.g., quantum physics or legal scholarship) containing field-specific jargon and acronyms to assess whether the prompt handles technical terminology appropriately and avoids over-extracting abbreviations as separate topics"
+  }
+]

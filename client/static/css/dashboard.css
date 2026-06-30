@@ -1,0 +1,62 @@
+/* Morning Dashboard — supplemental styles on top of Tailwind (CDN) */
+
+.ambient-shadow { box-shadow: 0 4px 20px rgba(96, 108, 118, 0.06); }
+
+/* Card shell (Tailwind @apply isn't available with the CDN runtime, so plain CSS) */
+.card {
+  background: #ffffff;
+  border-radius: 2rem;
+  padding: 2rem;
+  box-shadow: 0 4px 20px rgba(96, 108, 118, 0.06);
+}
+.card-head { display: flex; justify-content: space-between; align-items: center; }
+.card-title { font-family: "Plus Jakarta Sans", sans-serif; font-size: 20px; font-weight: 600; color: #111d25; }
+.card-eyebrow {
+  font-family: "JetBrains Mono", monospace; font-size: 12px; text-transform: uppercase;
+  letter-spacing: 0.12em; color: #895032;
+}
+
+/* up/down for stock change_pct */
+.up { color: #2e7d52; }
+.down { color: #ba1a1a; }
+
+/* per-card error state */
+.card-error {
+  display: flex; align-items: center; gap: 8px;
+  color: #ba1a1a; font-size: 14px;
+}
+
+/* loading skeleton shimmer */
+.skeleton {
+  border-radius: 8px;
+  background: linear-gradient(90deg, #e3effb 25%, #ddeaf5 37%, #e3effb 63%);
+  background-size: 400% 100%;
+  animation: shimmer 1.4s ease infinite;
+}
+@keyframes shimmer { 0% { background-position: 100% 0; } 100% { background-position: -100% 0; } }
+
+/* terminal-style log panel scrollbar */
+.sys-log { min-height: 220px; max-height: 320px; }
+.sys-log::-webkit-scrollbar { width: 8px; }
+.sys-log::-webkit-scrollbar-track { background: transparent; }
+.sys-log::-webkit-scrollbar-thumb { background: #3a4a5a; border-radius: 4px; }
+
+/* chat bubbles */
+.bubble {
+  max-width: 85%; padding: 10px 14px; font-size: 14px; line-height: 1.5;
+  overflow-wrap: anywhere; word-break: break-word;
+}
+.bubble-user { align-self: flex-end; background: #895032; color: #fff; border-radius: 14px 14px 4px 14px; }
+.bubble-bot  { align-self: flex-start; background: #ebf5ff; color: #52443d; border-radius: 14px 14px 14px 4px; }
+/* light markdown inside bot bubbles */
+.bubble-bot ul { margin: 6px 0; padding-left: 18px; list-style: disc; }
+.bubble-bot li { margin: 2px 0; }
+.bubble-bot strong { font-weight: 600; color: #111d25; }
+.bubble-bot br:first-child { display: none; }
+.typing span {
+  display: inline-block; width: 6px; height: 6px; margin: 0 1px; border-radius: 50%;
+  background: #85736c; animation: blink 1.2s infinite both;
+}
+.typing span:nth-child(2) { animation-delay: 0.2s; }
+.typing span:nth-child(3) { animation-delay: 0.4s; }
+@keyframes blink { 0%, 80%, 100% { opacity: 0.3; } 40% { opacity: 1; } }
