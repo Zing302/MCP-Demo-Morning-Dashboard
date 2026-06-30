@@ -14,3 +14,7 @@ venv/
 
 # Runtime activity log (regenerated as the app is used)
 data/activity.log
+
+# AI tooling artifacts (not part of the project)
+.gstack/
+docs/superpowers/
