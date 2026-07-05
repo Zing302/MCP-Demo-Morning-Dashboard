@@ -20,6 +20,97 @@
       "date": "2026-06-30",
       "time": "17:30",
       "duration_minutes": 45
+    },
+    {
+      "id": "c06e6c90-2c7e-457b-9724-e449e08ba2ef",
+      "title": "Morning Run",
+      "date": "2026-06-29",
+      "time": "07:00",
+      "duration_minutes": 45
+    },
+    {
+      "id": "2097a311-0453-4395-9245-27a7663c7db9",
+      "title": "Team Standup",
+      "date": "2026-06-30",
+      "time": "09:30",
+      "duration_minutes": 30
+    },
+    {
+      "id": "9a488c68-f83a-4d2f-9e23-6c97ea7c4449",
+      "title": "Lunch with Sarah",
+      "date": "2026-06-30",
+      "time": "12:30",
+      "duration_minutes": 60
+    },
+    {
+      "id": "537d40fb-8d47-4f8a-b982-3782f44c0888",
+      "title": "Product Review Meeting",
+      "date": "2026-07-01",
+      "time": "14:00",
+      "duration_minutes": 60
+    },
+    {
+      "id": "3d0af79c-e7df-4bb7-b523-025d4deb7221",
+      "title": "Gym Session",
+      "date": "2026-07-01",
+      "time": "07:30",
+      "duration_minutes": 60
+    },
+    {
+      "id": "db809818-c139-48c3-b9f7-4e4176303d51",
+      "title": "1:1 with Manager",
+      "date": "2026-07-02",
+      "time": "10:00",
+      "duration_minutes": 30
+    },
+    {
+      "id": "d84e70e4-8b20-43a8-8d72-46dc6c8bc913",
+      "title": "Deep Work Block",
+      "date": "2026-07-02",
+      "time": "13:00",
+      "duration_minutes": 120
+    },
+    {
+      "id": "0ddebeac-260f-4e60-9183-31240473083e",
+      "title": "Coffee Chat with Alex",
+      "date": "2026-07-03",
+      "time": "09:00",
+      "duration_minutes": 30
+    },
+    {
+      "id": "ad922b8e-cc29-42d6-99e7-1854dfb50127",
+      "title": "Sprint Planning",
+      "date": "2026-07-03",
+      "time": "11:00",
+      "duration_minutes": 90
+    },
+    {
+      "id": "81c3b022-7910-411b-ad48-b978e34c272b",
+      "title": "4th of July BBQ \ud83c\udf86",
+      "date": "2026-07-04",
+      "time": "15:00",
+      "duration_minutes": 180
+    },
+    {
+      "id": "39e95af7-0574-4f89-85e7-002f932a6568",
+      "title": "Fireworks Watch Party",
+      "date": "2026-07-04",
+      "time": "20:00",
+      "duration_minutes": 90
+    },
+    {
+      "id": "510148b0-5325-490b-9dc2-c1464b4579c1",
+      "title": "Weekly Review",
+      "date": "2026-07-05",
+      "time": "10:00",
+      "duration_minutes": 60
+    },
+    {
+      "id": "fabeabcc-3702-43c8-8dc8-b4b43b3c2118",
+      "title": "Evening Walk",
+      "date": "2026-07-05",
+      "time": "18:30",
+      "duration_minutes": 45
     }
   ],
   "todos": [

@@ -5,7 +5,7 @@
 import json
 import os
 import uuid
-from datetime import date
+from datetime import date, datetime
 from mcp.server.fastmcp import FastMCP
 from shared.logger import log_action
 
@@ -41,7 +41,7 @@ def write_entry(date: str, content: str, mood: str):
         "date": date,
         "content": content,
         "mood": mood,
-        "created_at": date.today().isoformat(),
+        "created_at": datetime.now().date().isoformat(),
     }
     data = load()
     data["entries"].append(new_entry)

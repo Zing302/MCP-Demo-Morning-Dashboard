@@ -41,6 +41,48 @@
       "content": "Wrapped the sprint a little behind, but the demo went better than expected.",
       "mood": "good",
       "created_at": "2026-06-23T08:30:00+00:00"
+    },
+    {
+      "id": "6bcc8570-eaff-40cb-b840-f8f4978ef706",
+      "date": "2026-07-05",
+      "content": "Shipped the weather card refactor and it felt clean. Good momentum heading into the week.",
+      "mood": "good",
+      "created_at": "2026-07-05"
+    },
+    {
+      "id": "64d7d56e-2b8a-4703-bb7a-530085f438f4",
+      "date": "2026-06-30",
+      "content": "Slow start to the day but got through my task list by the afternoon. Took a short walk in the evening \u2014 needed the reset.",
+      "mood": "neutral",
+      "created_at": "2026-07-05"
+    },
+    {
+      "id": "4beb7cae-4472-497a-b675-05d83f2de9d1",
+      "date": "2026-07-01",
+      "content": "Felt scattered most of the morning. Too many tabs open, literally and mentally. Closed everything and focused on one thing \u2014 helped a lot.",
+      "mood": "tough",
+      "created_at": "2026-07-05"
+    },
+    {
+      "id": "2b5db856-3b09-42d1-931f-1a17dfa28b92",
+      "date": "2026-07-02",
+      "content": "Good flow today. Knocked out a couple of lingering todos and had a solid lunch break. Feeling more on top of things.",
+      "mood": "good",
+      "created_at": "2026-07-05"
+    },
+    {
+      "id": "318e9396-2a0f-4d5a-bae9-03fae4cb7b56",
+      "date": "2026-07-03",
+      "content": "Pre-holiday energy made it hard to focus. Did some light reading and planning for next week instead. Not the most productive but felt intentional.",
+      "mood": "neutral",
+      "created_at": "2026-07-05"
+    },
+    {
+      "id": "a4813ddc-5215-4482-a77b-5763a4b8e93c",
+      "date": "2026-07-04",
+      "content": "4th of July! Took the full day off. Grilled outside, watched fireworks, and genuinely unplugged. Exactly what I needed.",
+      "mood": "good",
+      "created_at": "2026-07-05"
     }
   ]
 }
