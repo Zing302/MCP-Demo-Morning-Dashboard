@@ -21,7 +21,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI, Request
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
-from pydantic import BaseModel
+from pydantic import AnyUrl, BaseModel
 
 from client.mcp_client import manager
 from client.agent import run_tool_loop
@@ -79,6 +79,60 @@ async def _log_card():
     return await run_tool_loop(messages)
 
 
+# MCP RESOURCE primitive: the journal card reads read-only data by URI. The host
+# pulls it directly (application-controlled) — no LLM decides anything — and does
+# the mood aggregation itself. Contrast with tools (model-controlled).
+JOURNAL_RECENT_URI = "journal://entries/recent"
+
+
+async def _journal_card():
+    """Journal card, sourced from the `journal://entries/recent` RESOURCE.
+
+    Reads the raw last-7-days entries via the resource, then aggregates the mood
+    counts host-side into the shape renderJournal() expects.
+    """
+    session = manager.sessions.get("journal")
+    if session is None:
+        return {"error": "journal server not connected"}
+    result = await session.read_resource(AnyUrl(JOURNAL_RECENT_URI))
+    entries = []
+    for block in result.contents:
+        text = getattr(block, "text", "")
+        try:
+            data = json.loads(text)
+        except (ValueError, TypeError):
+            continue
+        entries.extend(data if isinstance(data, list) else [data])
+    counts = {"good": 0, "neutral": 0, "tough": 0}
+    for e in entries:
+        if isinstance(e, dict) and e.get("mood") in counts:
+            counts[e["mood"]] += 1
+    return {"total_entries": len(entries), "mood_counts": counts}
+
+
+# MCP PROMPT primitive: a user action ("open journal" in chat) invokes a named
+# server-side template, whose messages seed the conversation.
+JOURNAL_PROMPT_TRIGGERS = {"open journal", "journal with me", "/open_journal"}
+
+
+def _reply_text(result) -> str:
+    """run_tool_loop returns a string; a helper may return an {"error": ...} dict."""
+    if isinstance(result, dict) and "error" in result:
+        return f"Sorry — {result['error']}."
+    return result if isinstance(result, str) else str(result)
+
+
+async def _open_journal_prompt():
+    """Fetch the journal server's `open_journal` prompt and run it. The template's
+    own persona drives the turn, so we intentionally pass no system prompt."""
+    session = manager.sessions.get("journal")
+    if session is None:
+        return {"error": "journal server not connected"}
+    prompt = await session.get_prompt("open_journal")
+    messages = [{"role": m.role, "content": m.content.text} for m in prompt.messages]
+    return await run_tool_loop(messages)
+
+
 # --- routes ------------------------------------------------------------------
 
 @app.get("/")
@@ -102,7 +156,7 @@ async def refresh():
     """
     calendar, journal, weather, headlines, habits = await asyncio.gather(
         _safe(_card("compile_daily_schedule")),
-        _safe(_card("get_weekly_summary")),
+        _safe(_journal_card()),
         _safe(_card("synthesize_forecast", {"location": ""})),
         _safe(_card("get_headlines", {"topic": "AI technology", "limit": 5})),
         _safe(_card("get_habit_summary")),
@@ -123,6 +177,9 @@ class ChatRequest(BaseModel):
 
 @app.post("/api/chat")
 async def chat(req: ChatRequest):
+    # A user action can invoke a named MCP prompt template instead of a free chat turn.
+    if req.message.strip().lower() in JOURNAL_PROMPT_TRIGGERS:
+        return {"reply": _reply_text(await _open_journal_prompt())}
     system = build_system_prompt(manager.tools_by_server())
     messages = req.history + [{"role": "user", "content": req.message}]
     reply = await run_tool_loop(messages, system=system)
